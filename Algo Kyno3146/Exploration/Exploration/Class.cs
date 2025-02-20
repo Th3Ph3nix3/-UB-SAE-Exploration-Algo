@@ -41,6 +41,7 @@ namespace Exploration
         public class fourmi
         {
             public noeud position;
+            
             public fourmi(noeud position)
             {
                 this.position = position;
