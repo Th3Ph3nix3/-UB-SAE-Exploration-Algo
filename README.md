@@ -1,8 +1,6 @@
 # -SAE-Recueil-Besoin
 Projet de développement SAE fait en collaboration avec Noarbre, PereCast0re et Kyno3146
 
-Lien vers le site web : https://th3ph3nix3.github.io/-SAE-Recueil-Besoin/Partie-chocolaterie/accueil.html
-
 ## Aide aux dévellopeur pour GitHub
 ### Application
 - Installer l'application GitHub
