@@ -21,15 +21,21 @@ namespace Exploration
         {
             public noeud depart;
             public noeud arrivee;
-            public int cout;
+            public int count;
             public int pheromonnes;
             public arretes(noeud depart, noeud arrivee, int cout, int pheromonnes) //constructeur
             {
                 this.depart = depart;
                 this.arrivee = arrivee;
-                this.cout = cout;
-                this.pheromonnes = 0;
+                this.count = count;
+                this.pheromonnes = 10;
             }
+
+            public void evaporation()
+            {
+                this.pheromonnes = (int)(this.pheromonnes * 0.9);
+            }
+
         }
 
         public class graphe
@@ -41,10 +47,13 @@ namespace Exploration
         public class fourmi
         {
             public noeud position;
+            public List<noeud> visite;
             
             public fourmi(noeud position)
             {
                 this.position = position;
+                List<noeud> visite = new List<noeud>();
+                visite.Add(position);
             }
 
             public void deplacement(List<arretes> arretes)
@@ -54,15 +63,48 @@ namespace Exploration
                 {
                     if (arrete.depart == this.position)
                     {
-                        arretesPossibles.Add(arrete);
+                        // verifier si l'arrete a pour autre extremite un noeud visité
+                        bool visite = false;
+                        foreach (noeud n in this.visite)
+                        {
+                            if (n == arrete.arrivee)
+                            {
+                                visite = true;
+                            }
+                        }
+                        if (!visite)
+                            arretesPossibles.Add(arrete);
                     }
                 }
                 if (arretesPossibles.Count > 0)
                 {
                     Random rand = new Random();
+                    double[] coefficients = new double[arretesPossibles.Count];
+                    for (int i = 0; i < arretesPossibles.Count; i++)
+                    {
+                        coefficients[i] = coefficient(arretesPossibles[i], arretes);
+                    }
+                    // faire le choix en fonction du coefficient 
+
                     int index = rand.Next(arretesPossibles.Count);
                     this.position = arretesPossibles[index].arrivee;
+                    visite.Add(this.position);
                 }
+            }
+
+            public double coefficient(arretes a, List<arretes> arretes, int x, int y)
+            {
+                return a.pheromonnes**x / a.count **y;
+            }
+
+            public int totalcoefficients(List<arretes> arretes)
+            {
+                int total = 0;
+                foreach (arretes a in arretes)
+                {
+                    total += a.pheromonnes;
+                }
+                return total;
             }
         }
     }
