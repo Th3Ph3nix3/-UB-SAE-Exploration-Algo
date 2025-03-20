@@ -7,14 +7,6 @@ class Instance
     private int[,] lis_point;
     private int taille;
 
-    public int[,] Mat_dis
-    {
-        get
-        {
-            return this.mat_dis;
-        }
-    }
-
     public Instance(int nb)
     {
         this.mat_dis = new int[nb,nb];
