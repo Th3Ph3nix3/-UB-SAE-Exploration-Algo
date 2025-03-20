@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Net.NetworkInformation;
+using System.IO;
 
 class Instance
 {
@@ -21,6 +21,7 @@ class Instance
         this.lis_point = new int[nb,2];
         this.taille = nb;
         RemplirMatrice();
+        ecriture();
     }
 
     private bool contient(int x, int y)
@@ -63,6 +64,25 @@ class Instance
         return (int)(Math.Sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)));
     }
 
+    private void ecriture()
+    {
+        string cheminFichier = "../../../../../Points/points.txt";
+
+        using (StreamWriter writer = new StreamWriter(cheminFichier))
+        {
+            writer.WriteLine(this.taille.ToString());
+
+            for (int i = 0; i < this.taille; ++i)
+            {
+                for (int j = 0; j < this.taille; ++j)
+                {
+                    writer.Write(this.mat_dis[i, j].ToString() + " ");
+                }
+                writer.WriteLine();
+            }
+        }
+    }
+
     public void affiche()
     {
         for (int i = 0; i < this.taille; ++i)
@@ -71,7 +91,7 @@ class Instance
         }
         Console.WriteLine();
 
-            for (int i = 0; i < this.taille; ++i)
+        for (int i = 0; i < this.taille; ++i)
         {
             for (int j = 0; j < this.taille; ++j)
             {
