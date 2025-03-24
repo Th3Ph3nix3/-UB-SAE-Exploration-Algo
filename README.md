@@ -1,7 +1,10 @@
 # -SAE-Recueil-Besoin
-Projet de développement SAE fait en collaboration avec Noarbre, PereCast0re et Kyno3146
+SAE development project in collaboration with Noarbre, PereCast0re and Kyno3146
 
-## Aide aux dévellopeur pour GitHub
+## Description
+As part of the course on graphs, the aim of this project is to find group algorithms that would allow us to find, or at least get close to, the fastest route to allow teachers to visit the 190 restaurants in the department during the summer vacations.
+
+## Developer support for GitHub - FR
 ### Application
 - Installer l'application GitHub
 - Connecter votre compte
@@ -19,6 +22,3 @@ Projet de développement SAE fait en collaboration avec Noarbre, PereCast0re et 
 ### Les fichier
 - A chaque fois que vous voulez travailler sur les fichier n'oublier pas de faire fetch puis pull
 - A chaque modification n'oubliez pas de commit to main puis de push vos modification pour être sur que tous le monde y ont accès
-
-
-## Merci d'avoir lu
