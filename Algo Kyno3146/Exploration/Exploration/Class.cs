@@ -23,7 +23,7 @@ namespace Exploration
             public noeud arrivee;
             public int count;
             public int pheromonnes;
-            public arretes(noeud depart, noeud arrivee, int cout, int pheromonnes) //constructeur
+            public arretes(noeud depart, noeud arrivee, int count) //constructeur
             {
                 this.depart = depart;
                 this.arrivee = arrivee;
@@ -56,9 +56,13 @@ namespace Exploration
                 visite.Add(position);
             }
 
-            public void deplacement(List<arretes> arretes)
+            public arretes deplacement(List<arretes> arretes)
             {
                 List<arretes> arretesPossibles = new List<arretes>();
+                double alpha = 1.0;
+                double beta = 1.0;
+                Random rand = new Random();
+
                 foreach (arretes arrete in arretes)
                 {
                     if (arrete.depart == this.position)
@@ -78,33 +82,40 @@ namespace Exploration
                 }
                 if (arretesPossibles.Count > 0)
                 {
-                    Random rand = new Random();
-                    double[] coefficients = new double[arretesPossibles.Count];
+                    List<double> poids = new List<double>();
+                    double total = 0;
+
+                    // calcul des poids
+                    foreach (arretes a in arretesPossibles)
+                    {
+                        double tau = a.pheromonnes;
+                        double eta = 1.0 / a.count;
+                        double valeur = Math.Pow(tau, alpha) * Math.Pow(eta, beta);
+                        poids.Add(valeur);
+                        total += valeur;
+                    }
+                    // tirage d'un nombre aleatoire entre 0 et total
+                    double r = rand.NextDouble() * total;
+
+                    // selection de l'arrete
+                    double cumul = 0;
                     for (int i = 0; i < arretesPossibles.Count; i++)
                     {
-                        coefficients[i] = coefficient(arretesPossibles[i], arretes);
+                        cumul += poids[i];
+                        if (cumul >= r)
+                        {
+                            return arretesPossibles[i];
+                        }
                     }
-                    // faire le choix en fonction du coefficient 
 
-                    int index = rand.Next(arretesPossibles.Count);
-                    this.position = arretesPossibles[index].arrivee;
-                    visite.Add(this.position);
+                    // securite suplémentaire 
+                    return arretesPossibles[0]; // si rien n'est trouvé, on retourne la première arrete
+
                 }
-            }
-
-            public double coefficient(arretes a, List<arretes> arretes, int x, int y)
-            {
-                return a.pheromonnes**x / a.count **y;
-            }
-
-            public int totalcoefficients(List<arretes> arretes)
-            {
-                int total = 0;
-                foreach (arretes a in arretes)
+                else
                 {
-                    total += a.pheromonnes;
+                    return null; // si aucune arrete n'est trouvée, on retourne null
                 }
-                return total;
             }
         }
     }
