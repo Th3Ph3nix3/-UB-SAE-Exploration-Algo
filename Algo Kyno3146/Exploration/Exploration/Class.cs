@@ -48,12 +48,14 @@ namespace Exploration
         {
             public noeud position;
             public List<noeud> visite;
-            
+            public List<arretes> chemin;
+
             public fourmi(noeud position)
             {
                 this.position = position;
-                List<noeud> visite = new List<noeud>();
+                this.visite = new List<noeud>();
                 visite.Add(position);
+                this.chemin = new List<arretes>();
             }
 
             public arretes deplacement(List<arretes> arretes)
@@ -77,7 +79,7 @@ namespace Exploration
                             }
                         }
                         if (!visite)
-                            arretesPossibles.Add(arrete);
+                        arretesPossibles.Add(arrete);
                     }
                 }
                 if (arretesPossibles.Count > 0)
@@ -112,9 +114,20 @@ namespace Exploration
                     return arretesPossibles[0]; // si rien n'est trouvé, on retourne la première arrete
 
                 }
-                else
+                return null; // si aucune arrete n'est trouvée
+            }
+
+            public void pheromones()
+            {
+                int Q  = 100; 
+                int somme = 0;
+                foreach (arretes a in this.chemin)
                 {
-                    return null; // si aucune arrete n'est trouvée, on retourne null
+                    somme += a.count;
+                }
+                foreach (arretes a in this.chemin)
+                {
+                    a.pheromonnes += (int)(Q / somme);
                 }
             }
         }
