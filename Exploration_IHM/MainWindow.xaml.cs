@@ -20,4 +20,11 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+    private void ZoneTexte(object sender, TextChangedEventArgs e)
+    {
+        TexteIndication.Visibility = string.IsNullOrEmpty(TexBox_Nombre.Text)
+        ? Visibility.Visible
+        : Visibility.Collapsed;
+    }
 }
