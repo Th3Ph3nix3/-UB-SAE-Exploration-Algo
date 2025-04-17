@@ -2,6 +2,17 @@
 {
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        Console.WriteLine("Bonjour !");
+        Instance test = new Instance(10);
+        int[,] matrice = test.Lecture();
+        test.affiche();
+
+        Console.WriteLine("\n\n");
+        Console.WriteLine("Algo Glouton");
+        
+        Glouton glouton = new Glouton(1);
+        glouton.Parcour(matrice);
+        glouton.ToString();
+
     }
 }
