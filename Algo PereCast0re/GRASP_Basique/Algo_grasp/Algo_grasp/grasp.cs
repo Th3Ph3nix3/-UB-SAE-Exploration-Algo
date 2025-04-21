@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
-using static System.Net.Mime.MediaTypeNames;
-using System.Drawing;
 
-namespace GRASP
+namespace Algo_grasp
 {
-    public class GRASP
+    internal class grasp
     {
         #region attributes
         private int depart;
@@ -22,8 +19,8 @@ namespace GRASP
         /// </summary>
         public List<int> CheminGrasp
         {
-            get { return cheminGrasp; } 
-            set { cheminGrasp = value; } 
+            get { return cheminGrasp; }
+            set { cheminGrasp = value; }
         }
 
         /// <summary>
@@ -39,7 +36,7 @@ namespace GRASP
         /// Constructeur de la classe GRASP
         /// </summary>
         /// <param name="depart"></param>
-        public GRASP(int[,] matrice)
+        public grasp(int[,] matrice)
         {
             this.depart = 0;
             this.cheminGrasp = new List<int>(matrice.GetLength(0));
@@ -62,14 +59,17 @@ namespace GRASP
         /// </summary>
         /// <param name="matrice"></param>
         /// <returns></returns>
-        public int Highest(int[,] matrice, int position)
+        public int Highest(int[,] matrice)
         {
             int maxi = int.MinValue;
             for (int i = 0; i < matrice.GetLength(0); i++)
             {
-                if (maxi < matrice[position, i])
+                for (int j = 0; j < matrice.GetLength(1); j++)
                 {
-                    maxi = matrice[position, i];
+                    if (maxi < matrice[i, j])
+                    {
+                        maxi = matrice[i, j];
+                    }
                 }
             }
             return maxi;
@@ -87,14 +87,14 @@ namespace GRASP
             int maxi = int.MaxValue;
 
             //Création d'une liste de point
-            List<(int,int)> liste = new List<(int,int)>();
+            List<(int, int)> liste = new List<(int, int)>();
             for (int i = 0; i < matrice.GetLength(0); i++)
             {
                 liste.Add((i, matrice[point, i]));
             }
 
             Random random = new Random();
-            int rdm = random.Next(1, Highest(matrice, point));
+            int rdm = random.Next(1, liste.Count);
 
             // On cherche un point qui - le random et inférieur a 0 et on renvoie cette valeur 
             for (int j = 0; j < liste.Count; j++)
@@ -159,7 +159,7 @@ namespace GRASP
         {
             int taille = this.CheminGrasp.Count;
             string chemin = "";
-            for (int i = 0; i < taille; i++)    
+            for (int i = 0; i < taille; i++)
             {
                 chemin += this.CheminGrasp[i];
                 if (i < taille - 1)
