@@ -59,17 +59,14 @@ namespace Algo_grasp
         /// </summary>
         /// <param name="matrice"></param>
         /// <returns></returns>
-        public int Highest(int[,] matrice)
+        public int Highest(int[,] matrice,int point)
         {
             int maxi = int.MinValue;
             for (int i = 0; i < matrice.GetLength(0); i++)
             {
-                for (int j = 0; j < matrice.GetLength(1); j++)
+                if (maxi < matrice[point, i])
                 {
-                    if (maxi < matrice[i, j])
-                    {
-                        maxi = matrice[i, j];
-                    }
+                    maxi = matrice[point, i];
                 }
             }
             return maxi;
@@ -94,7 +91,8 @@ namespace Algo_grasp
             }
 
             Random random = new Random();
-            int rdm = random.Next(1, liste.Count);
+            int rdm = random.Next(1, Highest(matrice, point));
+            int rdm2;
 
             // On cherche un point qui - le random et inférieur a 0 et on renvoie cette valeur 
             for (int j = 0; j < liste.Count; j++)
@@ -108,10 +106,10 @@ namespace Algo_grasp
                 }
                 else
                 {
-                    if (calcul < maxi && !IsVisited(liste[j].Item1))
+                    if (j.Equals(liste.Count - 1))
                     {
-                        maxi = calcul;
-                        point = liste[j].Item1;
+                        rdm2 = random.Next(0, liste.Count);
+                        point = liste[rdm2].Item1;
                     }
                 }
             }

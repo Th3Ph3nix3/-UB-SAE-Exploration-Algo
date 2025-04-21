@@ -16,7 +16,7 @@ internal class Program
 
         // Instanciation de l'objet GRASP
         // Ajout du namespace car evite un conflit de nom
-        grasp algo = new grasp();
+        grasp algo = new grasp(matrice);
         algo.Parcour(matrice);
         algo.ToString();
 
