@@ -58,7 +58,7 @@ class Instance
 
     private void ecriture()
     {
-        string cheminFichier = "../../../../../Points/points.txt";
+        string cheminFichier = "C:\\Users\\thomi\\Desktop\\BUT_INFO\\Graphe\\SAE 2.02 Exploration\\-UB-SAE-Exploration-Algo\\Points\\points.txt";
 
         using (StreamWriter writer = new StreamWriter(cheminFichier))
         {
@@ -95,7 +95,7 @@ class Instance
 
     public int[,] Lecture()
     {
-        string cheminFichier = "../../../../../Points/points.txt";
+        string cheminFichier = "C:\\Users\\thomi\\Desktop\\BUT_INFO\\Graphe\\SAE 2.02 Exploration\\-UB-SAE-Exploration-Algo\\Points\\points.txt";
 
         string[] lignes = File.ReadAllLines(cheminFichier);
 
@@ -111,20 +111,5 @@ class Instance
             }
         }
         return matrice;
-    }
-
-    public void ecriture(List<int> Chemin, int taille_chemin, string nom_algo)
-    {
-        string cheminFichier = "../../../../../Solutions/" + nom_algo + ".txt";
-
-        using (StreamWriter writer = new StreamWriter(cheminFichier))
-        {
-            foreach(int chemin in Chemin)
-            {
-                writer.Write((chemin+1).ToString() + " ");
-            }
-            writer.WriteLine();
-            writer.Write(taille_chemin.ToString());
-        }
     }
 }
