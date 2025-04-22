@@ -2,12 +2,15 @@
 
 using Exploration;
 using System.Diagnostics.Tracing;
+using System.Security.Cryptography.X509Certificates;
 using static Exploration.Class;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static void Main(int[,] tab)
     {
+        graphe g2 = creerGraphe(tab);
+
         graphe graphe = new graphe();
         // Création des noeuds
         noeud n0 = new noeud(0);
@@ -96,6 +99,31 @@ internal class Program
             Console.WriteLine("de " + a.depart.numero + " à " + a.arrivee.numero);
         }
 
+
+    }
+
+    public static graphe creerGraphe(int[,] tab)
+    {
+        graphe graphe = new graphe();
+        List<noeud> noeuds = new List<noeud>();
+        List<arretes> arretes = new List<arretes>();
+        for (int i = 0; i < tab.GetLength(0); i++)
+        {
+            noeuds.Add(new noeud(i));
+        }
+        for (int i = 0; i < tab.GetLength(0); i++)
+        {
+            for (int j = 0; j < tab.GetLength(1); j++)
+            {
+                if (tab[i, j] != 0)
+                {
+                    arretes.Add(new arretes(noeuds[i], noeuds[j], tab[i, j]));
+                }
+            }
+        }
+        graphe.noeuds = noeuds;
+        graphe.arretes = arretes;
+        return graphe;
     }
 
 }
