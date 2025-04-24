@@ -1,0 +1,398 @@
+﻿<Window x:Class="Exploration_IHM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Exploration_IHM"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="192" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="192" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="192" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="192" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="192" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="192" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="192" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="10*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Width="455" Grid.Column="1" FontSize="20">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+        <Run FontWeight="Bold">Bienvenue</Run> sur notre comparateur d'algo devant résoudre un problème du plus court chemin
+                </TextBlock>
+            </Label>
+
+            <TextBlock Text="affichage erreur" TextAlignment="Center" TextWrapping="Wrap"
+         HorizontalAlignment="Center" VerticalAlignment="Center" 
+         Grid.Row="1" Grid.Column="1" 
+         Width="640" Height="61"/>
+
+            <Grid Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="175" Height="60" Grid.Row="2">
+                <TextBox Name="TexBox_Nombre"
+                     TextAlignment="Center" VerticalContentAlignment="Center"
+                     TextChanged="ZoneTexte"
+                     FontSize="20"
+                     />
+
+                <TextBlock Name="TexteIndication"
+                       Text="Entrez le nombre de noeuds ici..."
+                       Foreground="Gray"
+                       Margin="5,0,0,0"
+                       VerticalAlignment="Center"
+                       IsHitTestVisible="False"
+                       Visibility="Visible" HorizontalAlignment="Left" Width="170"
+                       />
+            </Grid>
+
+            <Button Content="Valider la selection"
+                HorizontalAlignment="Right" VerticalAlignment="Center"
+                Grid.Row="2" Grid.Column="1"
+                Height="60" Width="172"
+                Click="Button_Click" RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.482"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0.792"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+
+            
+
+            <Grid HorizontalAlignment="left" Grid.Row="4" Grid.Column="1">
+                <TextBlock TextAlignment="Center"
+               HorizontalAlignment="Stretch" VerticalAlignment="Center"
+               FontSize="16">
+                <Run FontWeight="Bold">Algo Glouton</Run> :
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="5" Grid.Column="1" x:Name="Glouton">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Chemin proposé :" TextAlignment="Center" FontSize="16"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                       Grid.Row="0" Grid.Column="0"/>
+                <TextBlock x:Name="Chemin_Glouton"
+                       Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                       VerticalAlignment="Center" Grid.Column="1" Height="49"/>
+
+                <TextBlock Text="Taille du chemin :" TextAlignment="Center" FontSize="16"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                       Grid.Row="1" Grid.Column="0"/>
+                <TextBlock x:Name="Taille_Glouton"
+                       Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                       Grid.Row="1" Grid.Column="1"/>
+
+                <TextBlock Text="Temps d'execution de l'algo :" TextAlignment="Center" FontSize="16"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                       Grid.Row="2" Grid.Column="0"/>
+                <TextBlock x:Name="Tps_Glouton"
+                       Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                       Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+
+
+
+            <Grid HorizontalAlignment="left" Grid.Row="6" Grid.Column="1">
+                <TextBlock TextAlignment="Center"
+               HorizontalAlignment="Stretch" VerticalAlignment="Center"
+               FontSize="16">
+                <Run FontWeight="Bold">Algo VNS</Run> (sans utilisation d'algo glouton au paravant) :
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="7" Grid.Column="1" x:Name="VNS">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Chemin proposé :" TextAlignment="Center" FontSize="16"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                       Grid.Row="0" Grid.Column="0"/>
+                <TextBlock x:Name="Chemin_VNS"
+                       Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                       VerticalAlignment="Center" Grid.Column="1" Height="49"/>
+
+                <TextBlock Text="Taille du chemin :" TextAlignment="Center" FontSize="16"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                       Grid.Row="1" Grid.Column="0"/>
+                <TextBlock x:Name="Taille_VNS"
+                       Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                       Grid.Row="1" Grid.Column="1"/>
+
+                <TextBlock Text="Temps d'execution de l'algo :" TextAlignment="Center" FontSize="16"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                       Grid.Row="2" Grid.Column="0"/>
+                <TextBlock x:Name="Tps_VNS"
+                       Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                       Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+
+
+
+            <Grid HorizontalAlignment="left" Grid.Row="8" Grid.Column="1">
+                <TextBlock TextAlignment="Center"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           FontSize="16">
+                           <Run FontWeight="Bold">Algo VNS</Run> (avec utilisation d'algo glouton au paravant) :
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="9" Grid.Column="1" x:Name="VNS_glouton">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Chemin proposé :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="0" Grid.Column="0"/>
+                <TextBlock x:Name="Chemin_VNS_Glouton"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           VerticalAlignment="Center" Grid.Column="1" Height="49"/>
+
+                <TextBlock Text="Taille du chemin :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="1" Grid.Column="0"/>
+                <TextBlock x:Name="Taille_VNS_Glouton"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="1" Grid.Column="1"/>
+
+                <TextBlock Text="Temps d'execution de l'algo :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="2" Grid.Column="0"/>
+                <TextBlock x:Name="Tps_VNS_Glouton"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+
+
+            <Grid HorizontalAlignment="left" Grid.Row="10" Grid.Column="1">
+                <TextBlock TextAlignment="Center"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           FontSize="16">
+                           <Run FontWeight="Bold">Algo Grasp Basique</Run> :
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="11" Grid.Column="1" x:Name="Grasp_B">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Chemin proposé :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="0" Grid.Column="0"/>
+                <TextBlock x:Name="Chemin_Grasp_B"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           VerticalAlignment="Center" Grid.Column="1" Height="49"/>
+
+                <TextBlock Text="Taille du chemin :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="1" Grid.Column="0"/>
+                <TextBlock x:Name="Taille_Grasp_B"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="1" Grid.Column="1"/>
+
+                <TextBlock Text="Temps d'execution de l'algo :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="2" Grid.Column="0"/>
+                <TextBlock x:Name="Tps_Grasp_B"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+
+
+
+            <Grid HorizontalAlignment="left" Grid.Row="12" Grid.Column="1">
+                <TextBlock TextAlignment="Center"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           FontSize="16">
+                           <Run FontWeight="Bold">Algo Grasp Modifié</Run> :
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="13" Grid.Column="1" x:Name="Grasp_M">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Chemin proposé :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="0" Grid.Column="0"/>
+                <TextBlock x:Name="Chemin_Grasp_M"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           VerticalAlignment="Center" Grid.Column="1" Height="49"/>
+
+                <TextBlock Text="Taille du chemin :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="1" Grid.Column="0"/>
+                <TextBlock x:Name="Taille_Grasp_M"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="1" Grid.Column="1"/>
+
+                <TextBlock Text="Temps d'execution de l'algo :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="2" Grid.Column="0"/>
+                <TextBlock x:Name="Tps_Grasp_M"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+
+
+
+            <Grid HorizontalAlignment="left" Grid.Row="14" Grid.Column="1">
+                <TextBlock TextAlignment="Center"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           FontSize="16">
+                           <Run FontWeight="Bold">Algo des Fourmie</Run> :
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="15" Grid.Column="1" x:Name="Fourmie">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Chemin proposé :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="0" Grid.Column="0"/>
+                <TextBlock x:Name="Chemin_Fourmie"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           VerticalAlignment="Center" Grid.Column="1" Height="49"/>
+
+                <TextBlock Text="Taille du chemin :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="1" Grid.Column="0"/>
+                <TextBlock x:Name="Taille_Fourmie"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="1" Grid.Column="1"/>
+
+                <TextBlock Text="Temps d'execution de l'algo :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="2" Grid.Column="0"/>
+                <TextBlock x:Name="Tps_Fourmie"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+
+
+
+            <Grid HorizontalAlignment="left" Grid.Row="16" Grid.Column="1">
+                <TextBlock TextAlignment="Center"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           FontSize="17">
+                           <Run FontWeight="Bold">Algo Held-Karp</Run> :
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="17" Grid.Column="1" x:Name="H_K">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Chemin proposé :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="0" Grid.Column="0"/>
+                <TextBlock x:Name="Chemin_H_K"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           VerticalAlignment="Center" Grid.Column="1" Height="49"/>
+
+                <TextBlock Text="Taille du chemin :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="1" Grid.Column="0"/>
+                <TextBlock x:Name="Taille_H_K"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="1" Grid.Column="1"/>
+
+                <TextBlock Text="Temps d'execution de l'algo :" TextAlignment="Center" FontSize="16"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="2" Grid.Column="0"/>
+                <TextBlock x:Name="Tps_H_K"
+                           Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                           Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+
+
+        </Grid>
+    </ScrollViewer>
+</Window>

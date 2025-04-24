@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-class Instance
+public class Instance
 {
     private int[,] mat_dis;
     private int[,] lis_point;

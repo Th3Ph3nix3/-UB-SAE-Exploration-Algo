@@ -29,6 +29,25 @@ public partial class MainWindow : Window
         : Visibility.Collapsed;
     }
 
+    private string Matrice_string(int[,] matrice)
+    {
+        string matrice_en_text = "";
+
+        for (int i = 0; i < matrice.GetLength(0); i++)
+        {
+            for (int j = 0; j < matrice.GetLength(1); j++)
+            {
+                matrice_en_text += matrice[i, j].ToString();
+                if (j < matrice.GetLength(1) - 1)
+                    matrice_en_text += ",";
+            }
+            if (i < matrice.GetLength(0) - 1)
+                matrice_en_text += ";";
+        }
+
+        return matrice_en_text;
+    }
+
     private void Button_Click(object sender, RoutedEventArgs e)
     {
         int nombre = int.Parse(TexBox_Nombre.Text);
@@ -75,12 +94,30 @@ public partial class MainWindow : Window
         #endregion
         #endregion
 
-        #region Grasp classique
+        #region Grasp Basique
+        Stopwatch Grasp_B = new Stopwatch();
+        Grasp_B grasp_B = new Grasp_B(matrice);
 
+        Grasp_B.Start();
+        grasp_B.Parcour(matrice);
+        Grasp_B.Stop();
+
+        Chemin_Grasp_B.Text = string.Join(" -> ", grasp_B.CheminGrasp);
+        //Taille_Grasp_B.Text = grasp_B.Cout.ToString();
+        Tps_Grasp_B.Text = Grasp_B.ElapsedMilliseconds.ToString() + " ms";
         #endregion
 
-        #region Grasp amélioré
+        #region Grasp Modifié
+        Stopwatch Grasp_M = new Stopwatch();
+        Grasp_M grasp_M = new Grasp_M(matrice);
 
+        Grasp_M.Start();
+        grasp_M.Parcour(matrice);
+        Grasp_M.Stop();
+
+        Chemin_Grasp_M.Text = string.Join(" -> ", grasp_M.CheminGrasp);
+        //Taille_Grasp_M.Text = grasp_M.Cout.ToString();
+        Tps_Grasp_M.Text = Grasp_M.ElapsedMilliseconds.ToString() + " ms";
         #endregion
 
         #region Fourmie
@@ -89,6 +126,12 @@ public partial class MainWindow : Window
 
         #region Held-Karp
 
+        ProcessStartInfo info = new ProcessStartInfo();
+        info.FileName = "hel.exe";
+        info.WorkingDirectory = @"../../../../C++";
+        info.Arguments = "12 test.txt";
+        info.UseShellExecute = true; // ou false si tu veux récupérer la sortie, sinon true c'est ok
+        Process.Start(info);
         #endregion
     }
 
