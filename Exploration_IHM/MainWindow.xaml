@@ -47,7 +47,7 @@
                        Margin="5,0,0,0"
                        VerticalAlignment="Center"
                        IsHitTestVisible="False"
-                       Visibility="Visible"
+                       Visibility="Visible" HorizontalAlignment="Left" Width="170"
                        />
         </Grid>
 
@@ -55,7 +55,8 @@
                 HorizontalAlignment="Left" VerticalAlignment="Center"
                 Margin="452,0,0,0" 
                 Grid.Row="2" Grid.Column="1"
-                Height="61" Width="188"/>
+                Height="61" Width="188"
+                Click="Button_Click"/>
 
         <Grid HorizontalAlignment="left" Grid.Row="4" Grid.Column="1">
             <TextBlock TextAlignment="Center"
@@ -80,20 +81,22 @@
                        HorizontalAlignment="Stretch" VerticalAlignment="Center"
                        Grid.Row="0" Grid.Column="0"/>
             <TextBlock Text="Chemin" TextAlignment="Center" FontSize="16"
-                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                       Grid.Row="0" Grid.Column="1"/>
+                       x:Name="Chemin" VerticalAlignment="Bottom"
+                       Grid.Row="0" Grid.Column="1" Margin="0,0,0,14"/>
 
             <TextBlock Text="Taille du chemin :" TextAlignment="Center" FontSize="16"
                        HorizontalAlignment="Stretch" VerticalAlignment="Center"
                        Grid.Row="1" Grid.Column="0"/>
             <TextBlock Text="Taille" TextAlignment="Center" FontSize="16"
+                       x:Name="Taille_Chemin"
                        HorizontalAlignment="Stretch" VerticalAlignment="Center"
                        Grid.Row="1" Grid.Column="1"/>
-            
+
             <TextBlock Text="Temps d'execution de l'algo :" TextAlignment="Center" FontSize="16"
                        HorizontalAlignment="Stretch" VerticalAlignment="Center"
                        Grid.Row="2" Grid.Column="0"/>
             <TextBlock Text="Tps" TextAlignment="Center" FontSize="16"
+                       x:Name="Temps"
                        HorizontalAlignment="Stretch" VerticalAlignment="Center"
                        Grid.Row="2" Grid.Column="1"/>
         </Grid>

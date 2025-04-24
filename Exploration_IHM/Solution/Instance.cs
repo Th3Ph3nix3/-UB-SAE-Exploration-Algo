@@ -58,7 +58,7 @@ class Instance
 
     private void ecriture()
     {
-        string cheminFichier = "../../../../../Points/points.txt";
+        string cheminFichier = "C:\\Users\\thomi\\Desktop\\BUT_INFO\\Graphe\\SAE 2.02 Exploration\\-UB-SAE-Exploration-Algo\\Points\\points.txt";
 
         using (StreamWriter writer = new StreamWriter(cheminFichier))
         {
@@ -91,5 +91,25 @@ class Instance
             }
             Console.WriteLine();
         }
+    }
+
+    public int[,] Lecture()
+    {
+        string cheminFichier = "C:\\Users\\thomi\\Desktop\\BUT_INFO\\Graphe\\SAE 2.02 Exploration\\-UB-SAE-Exploration-Algo\\Points\\points.txt";
+
+        string[] lignes = File.ReadAllLines(cheminFichier);
+
+        int taille = int.Parse(lignes[0]);
+        int[,] matrice = new int[taille, taille];
+
+        for (int i = 1; i < taille + 1; i++)
+        {
+            string[] elements = lignes[i].Split(' ');
+            for (int j = 0; j < taille; j++)
+            {
+                matrice[i - 1, j] = int.Parse(elements[j]);
+            }
+        }
+        return matrice;
     }
 }
