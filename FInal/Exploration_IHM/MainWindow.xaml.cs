@@ -125,12 +125,12 @@ public partial class MainWindow : Window
         #endregion
 
         #region Held-Karp
-        ProcessStartInfo info = new ProcessStartInfo();
-        info.FileName = "hel.exe";
-        info.WorkingDirectory = @"../../../../C++";
-        info.Arguments = "12 test.txt";
-        info.UseShellExecute = true; // ou false si tu veux récupérer la sortie, sinon true c'est ok
-        Process.Start(info);
+        //ProcessStartInfo info = new ProcessStartInfo();
+        //info.FileName = "hel.exe";
+        //info.WorkingDirectory = @"../../../../C++";
+        //info.Arguments = "12 test.txt";
+        //info.UseShellExecute = true; // ou false si tu veux récupérer la sortie, sinon true c'est ok
+        //Process.Start(info);
         #endregion
     }
 
