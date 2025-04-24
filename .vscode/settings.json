@@ -111,6 +111,10 @@
     "optional": "cpp",
     "random": "cpp",
     "string": "cpp",
-    "sstream": "cpp"
+    "sstream": "cpp",
+    "chrono": "cpp",
+    "forward_list": "cpp",
+    "iomanip": "cpp",
+    "ratio": "cpp"
   }
 }
