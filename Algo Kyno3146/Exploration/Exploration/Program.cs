@@ -5,48 +5,25 @@ using System.Diagnostics.Tracing;
 using System.Security.Cryptography.X509Certificates;
 using static Exploration.Class;
 
-internal class Program
-{
-    private static void Main(int[,] tab)
+internal class Program {
+
+
+    public List<arretes> TrouverChemin(int[,] tab)
     {
-        graphe g2 = creerGraphe(tab);
+        graphe graphe = creerGraphe(tab);
 
-        graphe graphe = new graphe();
-        // Création des noeuds
-        noeud n0 = new noeud(0);
-        noeud n1 = new noeud(1);
-        noeud n2 = new noeud(2);
-        noeud n3 = new noeud(3);
 
-        graphe.noeuds = new List<noeud> { n0, n1, n2, n3 };
-
-        // Création des arêtes
-        graphe.arretes = new List<arretes>
-        {
-            new arretes(n0, n1, 5),
-            new arretes(n1, n2, 10),
-            new arretes(n2, n3, 15),
-            new arretes(n3, n0, 10),
-            new arretes(n0, n2, 12),
-            new arretes(n1, n3, 8),
-            new arretes(n1, n0, 5),
-            new arretes(n2, n1, 10),
-            new arretes(n3, n2, 15),
-            new arretes(n0, n3, 10),
-            new arretes(n2, n0, 12),
-            new arretes(n3, n1, 8)
-        };
 
         List<fourmi> fourmis = new List<Class.fourmi>();
         List<arretes> Chemin_le_plus_court = new List<arretes>();
         uint Count_Chemin_Le_Plus_court = unchecked((uint)-1);
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 100; i++)
         {
-            fourmis.Add(new fourmi(graphe.noeuds[0])); 
+            fourmis.Add(new fourmi(graphe.noeuds[0]));
         }
 
 
-        for (int t = 0; t < 10; t++)
+        for (int t = 0; t < 1000; t++)
         {
             foreach (fourmi f in fourmis)
             {
@@ -63,7 +40,7 @@ internal class Program
                 arretes retour = null;
                 foreach (arretes a in graphe.arretes)
                 {
-                    if (a.depart == f.position && a.arrivee == n0)
+                    if (a.depart == f.position && a.arrivee == graphe.noeuds[0])
                     {
                         retour = a;
                         break;
@@ -99,7 +76,28 @@ internal class Program
             Console.WriteLine("de " + a.depart.numero + " à " + a.arrivee.numero);
         }
 
+        return Chemin_le_plus_court;
 
+    }
+
+    public List<int> Transformer_Chemin(List<arretes> chemin)
+    {
+        List<int> tab = new List<int>();
+        for (int i = 0; i < chemin.Count; i++)
+        {
+            tab.Add(chemin[i].depart.numero);
+        }
+        return tab;
+    }
+
+    public int Calculer_taille(List<arretes> chemin)
+    {
+        int taille = 0;
+        foreach (arretes a in chemin)
+        {
+            taille += a.count;
+        }
+        return taille;
     }
 
     public static graphe creerGraphe(int[,] tab)
@@ -125,5 +123,31 @@ internal class Program
         graphe.arretes = arretes;
         return graphe;
     }
+    public void ecriture(List<int> Chemin, int taille_chemin, string nom_algo)
+    {
+        string cheminFichier = "../../../../../Solutions/" + nom_algo + ".txt";
+
+        using (StreamWriter writer = new StreamWriter(cheminFichier))
+        {
+            foreach (int chemin in Chemin)
+            {
+                writer.Write((chemin + 1).ToString() + " ");
+            }
+            writer.WriteLine();
+            writer.Write(taille_chemin.ToString());
+        }
+    }
+
+    private void Ecriture(int[,] tab)
+    {
+        List<arretes> Chemin = new List<arretes>();
+        Chemin = TrouverChemin(tab);
+        List<int> chemin = Transformer_Chemin(Chemin);
+        int taille = Calculer_taille(Chemin);
+
+        ecriture(chemin, taille, "Algorithme de la colonie de fourmis");
+    }
+
+    
 
 }
