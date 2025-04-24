@@ -3,8 +3,14 @@ using System.ComponentModel;
 using static System.Net.Mime.MediaTypeNames;
 
 public class Glouton {
-    private int cout = 0;
-	private int depart;
+    private int cout;
+    public int Cout
+    {
+        get { return cout; }
+        set { cout = value; }
+    }
+
+    private int depart;
 	public int Depart {
 		get {
 			return depart;
@@ -23,6 +29,7 @@ public class Glouton {
     public Glouton(int depart) {
 		this.depart = depart;
         this.cheminGlouton = new List<int>();
+        this.cout = 0;
     }
 
     public void SetChemin(int[,] matrice)
@@ -66,7 +73,7 @@ public class Glouton {
             }
             depart = prochain;
         }
-        Glouton.cout = cout;
+        this.cout = cout;
     }
 	public void ToString() {
         int taille = this.CheminGlouton.Count;
