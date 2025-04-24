@@ -119,6 +119,7 @@ public class Glouton {
         int depart = this.depart;
         int size = matrice.GetLength(0);
         int cout = 0;
+        int tmp = 0;
 
         while (cheminGlouton.Count < size)
         {
@@ -134,14 +135,15 @@ public class Glouton {
                     if (distance > 0 && distance < min)
                     {
                         min = distance;
-                        prochain = i;
-                        cout += matrice[depart, prochain];
+                        tmp = i;
+                        
                     }
                 }
             }
+            this.cout += matrice[depart, tmp];
+            prochain = tmp;
             depart = prochain;
         }
-        this.cout = cout;
     }
 
     #endregion
@@ -165,6 +167,7 @@ public class Glouton {
         }
         string message = "Le chemin glouton est : " + chemin;
         
+        Console.WriteLine("Cout du chemin : " + this.cout);
         Console.WriteLine(message);
     }
 
