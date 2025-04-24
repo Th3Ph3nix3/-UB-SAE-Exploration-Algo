@@ -7,35 +7,11 @@ using static Exploration.Class;
 
 internal class Program
 {
-    private static void Main(int[,] tab)
+    private static List<arretes> TrouverChemin(int[,] tab)
     {
-        graphe g2 = creerGraphe(tab);
+        graphe graphe = creerGraphe(tab);
 
-        graphe graphe = new graphe();
-        // Création des noeuds
-        noeud n0 = new noeud(0);
-        noeud n1 = new noeud(1);
-        noeud n2 = new noeud(2);
-        noeud n3 = new noeud(3);
-
-        graphe.noeuds = new List<noeud> { n0, n1, n2, n3 };
-
-        // Création des arêtes
-        graphe.arretes = new List<arretes>
-        {
-            new arretes(n0, n1, 5),
-            new arretes(n1, n2, 10),
-            new arretes(n2, n3, 15),
-            new arretes(n3, n0, 10),
-            new arretes(n0, n2, 12),
-            new arretes(n1, n3, 8),
-            new arretes(n1, n0, 5),
-            new arretes(n2, n1, 10),
-            new arretes(n3, n2, 15),
-            new arretes(n0, n3, 10),
-            new arretes(n2, n0, 12),
-            new arretes(n3, n1, 8)
-        };
+       
 
         List<fourmi> fourmis = new List<Class.fourmi>();
         List<arretes> Chemin_le_plus_court = new List<arretes>();
@@ -63,7 +39,7 @@ internal class Program
                 arretes retour = null;
                 foreach (arretes a in graphe.arretes)
                 {
-                    if (a.depart == f.position && a.arrivee == n0)
+                    if (a.depart == f.position && a.arrivee == graphe.noeuds[0])
                     {
                         retour = a;
                         break;
@@ -99,7 +75,18 @@ internal class Program
             Console.WriteLine("de " + a.depart.numero + " à " + a.arrivee.numero);
         }
 
+        return Chemin_le_plus_court;
 
+    }
+
+    public int Calculer_taille(List<arretes> chemin)
+    {
+        int taille = 0;
+        foreach (arretes a in chemin)
+        {
+            taille += a.count;
+        }
+        return taille;
     }
 
     public static graphe creerGraphe(int[,] tab)
