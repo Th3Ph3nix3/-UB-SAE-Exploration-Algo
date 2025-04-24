@@ -14,7 +14,7 @@
         glouton.Parcour(matrice);
         glouton.ToString();
 
-
+        test.ecriture(glouton.CheminGlouton, 10, "Glouton");
 
     }
 }
