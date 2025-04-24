@@ -9,14 +9,27 @@ namespace Algo_grasp
     internal class grasp
     {
         #region attributes
-        private int depart;
-        private List<int> cheminGrasp;
-        #endregion
 
-        #region constructor
+        /// <summary>
+        /// Propriété Depart
+        /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
+        private int depart;
+
         /// <summary>
         /// Propriété CheminGrasp
         /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
+        private List<int> cheminGrasp;
+
+        #endregion
+
+        #region constructor
+
+        /// <summary>
+        /// Propriété CheminGrasp
+        /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
         public List<int> CheminGrasp
         {
             get { return cheminGrasp; }
@@ -26,6 +39,7 @@ namespace Algo_grasp
         /// <summary>
         /// Propriété Depart
         /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
         public int Depart
         {
             get { return depart; }
@@ -36,19 +50,22 @@ namespace Algo_grasp
         /// Constructeur de la classe GRASP
         /// </summary>
         /// <param name="depart"></param>
+        /// <author>Barthoux Sauze Thomas</author>
         public grasp(int[,] matrice)
         {
             this.depart = 0;
             this.cheminGrasp = new List<int>(matrice.GetLength(0));
         }
+
         #endregion
 
-
         #region methods
+
         /// <summary>
         /// Ajoute un point au chemin Grasp
         /// </summary>
         /// <param name="point"></param>
+        /// <author>Barthoux Sauze Thomas</author>
         public void AddChemin(int point)
         {
             this.CheminGrasp.Add(point);
@@ -58,7 +75,8 @@ namespace Algo_grasp
         /// Compter le nombre total de points dans la matrice
         /// </summary>
         /// <param name="matrice"></param>
-        /// <returns></returns>
+        /// <returns>Retourne le point le plus grand de la ligne</returns>
+        /// <author>Barthoux Sauze Thomas</author>
         public int Highest(int[,] matrice,int point)
         {
             int maxi = int.MinValue;
@@ -77,7 +95,8 @@ namespace Algo_grasp
         /// </summary>
         /// <param name="matrice"></param>
         /// <param name="point"></param>
-        /// <returns></returns>
+        /// <returns>Renvoie le point suivant</returns>
+        /// <author>Barthoux Sauze Thomas</author>
         public int selectPoint(int[,] matrice, int point)
         {
             int calcul = 0;
@@ -120,7 +139,8 @@ namespace Algo_grasp
         /// Vérifie si le point a déjà été visité
         /// </summary>
         /// <param name="point"></param>
-        /// <returns></returns>
+        /// <returns>Dit si on a deja visiter le point ou pas</returns>
+        /// <author>Barthoux Sauze Thomas</author>
         public bool IsVisited(int point)
         {
             return this.cheminGrasp.Contains(point);
@@ -130,6 +150,7 @@ namespace Algo_grasp
         /// Parcours la matrice et ajoute les points au chemin Grasp
         /// </summary>
         /// <param name="matrice"></param>
+        /// <author>Barthoux Sauze Thomas</author>
         public void Parcour(int[,] matrice)
         {
             int point = this.depart;
@@ -150,9 +171,14 @@ namespace Algo_grasp
 
         }
 
+        #endregion
+
+        #region Print
+
         /// <summary>
         /// Affiche le chemin grasp
         /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
         public void ToString()
         {
             int taille = this.CheminGrasp.Count;
@@ -169,7 +195,6 @@ namespace Algo_grasp
 
             Console.WriteLine(message);
         }
-
 
         #endregion
 

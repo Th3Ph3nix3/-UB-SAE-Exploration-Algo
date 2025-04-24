@@ -12,7 +12,16 @@ namespace GRASP
     public class GRASP
     {
         #region attributes
+        /// <summary>
+        /// Propriété Depart
+        /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
         private int depart;
+
+        /// <summary>
+        /// Propriété CheminGrasp
+        /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
         private List<int> cheminGrasp;
         #endregion
 
@@ -20,6 +29,7 @@ namespace GRASP
         /// <summary>
         /// Propriété CheminGrasp
         /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
         public List<int> CheminGrasp
         {
             get { return cheminGrasp; } 
@@ -29,6 +39,7 @@ namespace GRASP
         /// <summary>
         /// Propriété Depart
         /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
         public int Depart
         {
             get { return depart; }
@@ -38,7 +49,8 @@ namespace GRASP
         /// <summary>
         /// Constructeur de la classe GRASP
         /// </summary>
-        /// <param name="depart"></param>
+        /// <param name="depart">De base mis au point 0</param>
+        /// /// <author>Barthoux Sauze Thomas</author>
         public GRASP(int[,] matrice)
         {
             this.depart = 0;
@@ -46,12 +58,12 @@ namespace GRASP
         }
         #endregion
 
-
         #region methods
         /// <summary>
         /// Ajoute un point au chemin Grasp
         /// </summary>
         /// <param name="point"></param>
+        /// <author>Barthoux Sauze Thomas</author>
         public void AddChemin(int point)
         {
             this.CheminGrasp.Add(point);
@@ -61,7 +73,8 @@ namespace GRASP
         /// Compter le nombre total de points dans la matrice
         /// </summary>
         /// <param name="matrice"></param>
-        /// <returns></returns>
+        /// <returns>Retourne le point le plus grand de la ligne</returns>
+        /// <author>Barthoux Sauze Thomas</author>
         public int Highest(int[,] matrice, int position)
         {
             int maxi = int.MinValue;
@@ -80,7 +93,8 @@ namespace GRASP
         /// </summary>
         /// <param name="matrice"></param>
         /// <param name="point"></param>
-        /// <returns></returns>
+        /// <returns>Retourne le point suivant</returns>
+        /// <author>Barthoux Sauze Thomas</author>
         public int selectPoint(int[,] matrice, int point)
         {
             int calcul = 0;
@@ -122,7 +136,8 @@ namespace GRASP
         /// Vérifie si le point a déjà été visité
         /// </summary>
         /// <param name="point"></param>
-        /// <returns></returns>
+        /// <returns>Return si oui ou non si on as deja visiter ce point</returns>
+        /// <author>Barthoux Sauze Thomas</author>
         public bool IsVisited(int point)
         {
             return this.cheminGrasp.Contains(point);
@@ -132,6 +147,7 @@ namespace GRASP
         /// Parcours la matrice et ajoute les points au chemin Grasp
         /// </summary>
         /// <param name="matrice"></param>
+        /// <author>Barthoux Sauze Thomas</author>
         public void Parcour(int[,] matrice)
         {
             int point = this.depart;
@@ -152,14 +168,19 @@ namespace GRASP
 
         }
 
+        #endregion
+
+        #region Print
+
         /// <summary>
         /// Affiche le chemin grasp
         /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
         public void ToString()
         {
             int taille = this.CheminGrasp.Count;
             string chemin = "";
-            for (int i = 0; i < taille; i++)    
+            for (int i = 0; i < taille; i++)
             {
                 chemin += this.CheminGrasp[i];
                 if (i < taille - 1)
@@ -174,6 +195,5 @@ namespace GRASP
 
 
         #endregion
-
     }
 }
