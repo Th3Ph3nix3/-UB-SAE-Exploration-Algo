@@ -125,7 +125,6 @@ public partial class MainWindow : Window
         #endregion
 
         #region Held-Karp
-
         ProcessStartInfo info = new ProcessStartInfo();
         info.FileName = "hel.exe";
         info.WorkingDirectory = @"../../../../C++";
