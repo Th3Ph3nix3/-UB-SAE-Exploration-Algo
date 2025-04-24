@@ -5,24 +5,25 @@ using System.Diagnostics.Tracing;
 using System.Security.Cryptography.X509Certificates;
 using static Exploration.Class;
 
-internal class Program
-{
-    private static List<arretes> TrouverChemin(int[,] tab)
+internal class Program {
+
+
+    public List<arretes> TrouverChemin(int[,] tab)
     {
         graphe graphe = creerGraphe(tab);
 
-       
+
 
         List<fourmi> fourmis = new List<Class.fourmi>();
         List<arretes> Chemin_le_plus_court = new List<arretes>();
         uint Count_Chemin_Le_Plus_court = unchecked((uint)-1);
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 100; i++)
         {
-            fourmis.Add(new fourmi(graphe.noeuds[0])); 
+            fourmis.Add(new fourmi(graphe.noeuds[0]));
         }
 
 
-        for (int t = 0; t < 10; t++)
+        for (int t = 0; t < 1000; t++)
         {
             foreach (fourmi f in fourmis)
             {
@@ -79,6 +80,16 @@ internal class Program
 
     }
 
+    public List<int> Transformer_Chemin(List<arretes> chemin)
+    {
+        List<int> tab = new List<int>();
+        for (int i = 0; i < chemin.Count; i++)
+        {
+            tab.Add(chemin[i].depart.numero);
+        }
+        return tab;
+    }
+
     public int Calculer_taille(List<arretes> chemin)
     {
         int taille = 0;
@@ -112,5 +123,31 @@ internal class Program
         graphe.arretes = arretes;
         return graphe;
     }
+    public void ecriture(List<int> Chemin, int taille_chemin, string nom_algo)
+    {
+        string cheminFichier = "../../../../../Solutions/" + nom_algo + ".txt";
+
+        using (StreamWriter writer = new StreamWriter(cheminFichier))
+        {
+            foreach (int chemin in Chemin)
+            {
+                writer.Write((chemin + 1).ToString() + " ");
+            }
+            writer.WriteLine();
+            writer.Write(taille_chemin.ToString());
+        }
+    }
+
+    private void Ecriture(int[,] tab)
+    {
+        List<arretes> Chemin = new List<arretes>();
+        Chemin = TrouverChemin(tab);
+        List<int> chemin = Transformer_Chemin(Chemin);
+        int taille = Calculer_taille(Chemin);
+
+        ecriture(chemin, taille, "Algorithme de la colonie de fourmis");
+    }
+
+    
 
 }
