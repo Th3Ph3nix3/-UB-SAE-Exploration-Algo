@@ -23,9 +23,27 @@ namespace GRASP
         /// </summary>
         /// <author>Barthoux Sauze Thomas</author>
         private List<int> cheminGrasp;
+
+        /// <summary>
+        /// Propriété Cout
+        /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
+        private int cout;
+
         #endregion
 
         #region constructor
+
+        /// <summary>
+        /// Propriété Cout
+        /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
+        public int Cout
+        {
+            get { return cout; }
+            set { cout = value; }
+        }
+
         /// <summary>
         /// Propriété CheminGrasp
         /// </summary>
@@ -55,6 +73,7 @@ namespace GRASP
         {
             this.depart = 0;
             this.cheminGrasp = new List<int>(matrice.GetLength(0));
+            this.cout = 0;
         }
         #endregion
 
@@ -151,7 +170,6 @@ namespace GRASP
         public void Parcour(int[,] matrice)
         {
             int point = this.depart;
-            int cout = 0;
 
             AddChemin(point);
 
@@ -160,12 +178,9 @@ namespace GRASP
                 int suivant = selectPoint(matrice, point);
                 cheminGrasp.Add(suivant);
 
-                cout += matrice[point, suivant];
+                this.cout += matrice[point, suivant];
                 point = suivant;
             }
-
-            Console.WriteLine("Le cout du chemin est de : " + cout);
-
         }
 
         #endregion
@@ -190,6 +205,7 @@ namespace GRASP
             }
             string message = "Le chemin glouton est : " + chemin;
 
+            Console.WriteLine("Le cout du chemin est de : " + this.cout);
             Console.WriteLine(message);
         }
 

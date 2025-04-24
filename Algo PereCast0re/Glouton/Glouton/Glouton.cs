@@ -118,7 +118,6 @@ public class Glouton {
     {
         int depart = this.depart;
         int size = matrice.GetLength(0);
-        int cout = 0;
         int tmp = 0;
 
         while (cheminGlouton.Count < size)
