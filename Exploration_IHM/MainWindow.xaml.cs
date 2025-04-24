@@ -35,18 +35,44 @@ public partial class MainWindow : Window
         Instance instance = new Instance(nombre);
         int[,] matrice = instance.Lecture();
 
-        /// Glouton complété a valider
         #region Glouton
         Stopwatch Glouton = new Stopwatch();
-        Glouton.Start();
-
         Glouton glouton = new Glouton(0);
-        glouton.Parcour(matrice);
 
+        Glouton.Start();
+        glouton.Parcour(matrice);
         Glouton.Stop();
-        Chemin.Text = "Chemin Glouton : " + string.Join(" -> ", glouton.CheminGlouton);
-        Taille_Chemin.Text = "Taille : " + glouton.Cout;
-        Temps.Text = "Glouton : " + Glouton.ElapsedMilliseconds + " ms";
+
+        Chemin_Glouton.Text = string.Join(" -> ", glouton.CheminGlouton);
+        Taille_Glouton.Text = glouton.Cout.ToString();
+        Tps_Glouton.Text = Glouton.ElapsedMilliseconds.ToString() + " ms";
+        #endregion
+
+        #region VNS
+        VNS vns = new VNS(matrice);
+        #region sans glouton
+        Stopwatch Vns = new Stopwatch();
+        
+        Vns.Start();
+        vns.TrouverCycleVNS(0);
+        Glouton.Stop();
+
+        Chemin_VNS.Text = string.Join(" -> ", vns.Chemin);
+        Taille_VNS.Text = vns.ObtenirCout(vns.Chemin).ToString();
+        Tps_VNS.Text = Vns.ElapsedMilliseconds.ToString() + " ms";
+        #endregion
+
+        #region avec glouton
+        Stopwatch Vns_glouton = new Stopwatch();
+
+        Vns_glouton.Start();
+        vns.TrouverCycleVNS(glouton.CheminGlouton);
+        Vns_glouton.Stop();
+
+        Chemin_VNS_Glouton.Text = string.Join(" -> ", vns.Chemin);
+        Taille_VNS_Glouton.Text = vns.ObtenirCout(vns.Chemin).ToString();
+        Tps_VNS_Glouton.Text = Vns_glouton.ElapsedMilliseconds.ToString() + " ms";
+        #endregion
         #endregion
 
         #region Grasp classique
@@ -58,14 +84,6 @@ public partial class MainWindow : Window
         #endregion
 
         #region Fourmie
-
-        #endregion
-
-        #region Hazard
-
-        #endregion
-
-        #region Recherche local
 
         #endregion
 

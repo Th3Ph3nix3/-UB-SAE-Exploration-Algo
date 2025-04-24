@@ -58,7 +58,7 @@ class Instance
 
     private void ecriture()
     {
-        string cheminFichier = "C:\\Users\\thomi\\Desktop\\BUT_INFO\\Graphe\\SAE 2.02 Exploration\\-UB-SAE-Exploration-Algo\\Points\\points.txt";
+        string cheminFichier = "../../../../Points/points.txt";
 
         using (StreamWriter writer = new StreamWriter(cheminFichier))
         {
@@ -95,7 +95,7 @@ class Instance
 
     public int[,] Lecture()
     {
-        string cheminFichier = "C:\\Users\\thomi\\Desktop\\BUT_INFO\\Graphe\\SAE 2.02 Exploration\\-UB-SAE-Exploration-Algo\\Points\\points.txt";
+        string cheminFichier = "../../../../Points/points.txt";
 
         string[] lignes = File.ReadAllLines(cheminFichier);
 
