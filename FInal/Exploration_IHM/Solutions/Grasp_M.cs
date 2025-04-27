@@ -7,6 +7,7 @@ using System.ComponentModel;
 using static System.Net.Mime.MediaTypeNames;
 using System.Drawing;
 
+
     public class Grasp_M
     {
         #region attributes
@@ -21,9 +22,27 @@ using System.Drawing;
         /// </summary>
         /// <author>Barthoux Sauze Thomas</author>
         private List<int> cheminGrasp;
+
+        /// <summary>
+        /// Propriété Cout
+        /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
+        private int cout;
+
         #endregion
 
         #region constructor
+
+        /// <summary>
+        /// Propriété Cout
+        /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
+        public int Cout
+        {
+            get { return cout; }
+            set { cout = value; }
+        }
+
         /// <summary>
         /// Propriété CheminGrasp
         /// </summary>
@@ -53,6 +72,7 @@ using System.Drawing;
         {
             this.depart = 0;
             this.cheminGrasp = new List<int>(matrice.GetLength(0));
+            this.cout = 0;
         }
         #endregion
 
@@ -149,7 +169,6 @@ using System.Drawing;
         public void Parcour(int[,] matrice)
         {
             int point = this.depart;
-            int cout = 0;
 
             AddChemin(point);
 
@@ -158,12 +177,9 @@ using System.Drawing;
                 int suivant = selectPoint(matrice, point);
                 cheminGrasp.Add(suivant);
 
-                cout += matrice[point, suivant];
+                this.cout += matrice[point, suivant];
                 point = suivant;
             }
-
-            Console.WriteLine("Le cout du chemin est de : " + cout);
-
         }
 
         #endregion
@@ -188,9 +204,11 @@ using System.Drawing;
             }
             string message = "Le chemin glouton est : " + chemin;
 
+            Console.WriteLine("Le cout du chemin est de : " + this.cout);
             Console.WriteLine(message);
         }
 
 
         #endregion
     }
+

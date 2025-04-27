@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Exploration_IHM;
 
@@ -103,7 +104,7 @@ public partial class MainWindow : Window
         Grasp_B.Stop();
 
         Chemin_Grasp_B.Text = string.Join(" -> ", grasp_B.CheminGrasp);
-        //Taille_Grasp_B.Text = grasp_B.Cout.ToString();
+        Taille_Grasp_B.Text = grasp_B.Cout.ToString();
         Tps_Grasp_B.Text = Grasp_B.ElapsedMilliseconds.ToString() + " ms";
         #endregion
 
@@ -116,7 +117,7 @@ public partial class MainWindow : Window
         Grasp_M.Stop();
 
         Chemin_Grasp_M.Text = string.Join(" -> ", grasp_M.CheminGrasp);
-        //Taille_Grasp_M.Text = grasp_M.Cout.ToString();
+        Taille_Grasp_M.Text = grasp_M.Cout.ToString();
         Tps_Grasp_M.Text = Grasp_M.ElapsedMilliseconds.ToString() + " ms";
         #endregion
 
@@ -126,11 +127,29 @@ public partial class MainWindow : Window
 
         #region Held-Karp
         //ProcessStartInfo info = new ProcessStartInfo();
-        //info.FileName = "hel.exe";
+        //info.FileName = "Held_Karp.exe";
         //info.WorkingDirectory = @"../../../../C++";
-        //info.Arguments = "12 test.txt";
-        //info.UseShellExecute = true; // ou false si tu veux récupérer la sortie, sinon true c'est ok
+        //info.Arguments = $"\"{Matrice_string(matrice)}\"";
+        //info.UseShellExecute = true;
         //Process.Start(info);
+
+        //string CheminOutput = "../../../../C++/output.txt";
+        //string CheminTps = "../../../../C++/temps_execution.txt";
+
+        //string chemin = "";
+        //string cout = "";
+        //string tps = "";
+
+        //string[] Lignes_Output = File.ReadAllLines(CheminOutput);
+        //string[] Lignes_Tps = File.ReadAllLines(CheminTps);
+        //chemin = Lignes_Output[0];
+        //cout = Lignes_Output[1];
+        //tps = Lignes_Tps[0];
+        //chemin = chemin.Replace(" ", " -> ");
+
+        //Chemin_H_K.Text = chemin;
+        //Taille_H_K.Text = cout;
+        //Tps_H_K.Text = tps;
         #endregion
     }
 
