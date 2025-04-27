@@ -51,7 +51,22 @@ public partial class MainWindow : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        int nombre = int.Parse(TexBox_Nombre.Text);
+        int nombre;
+        bool reussit = int.TryParse(TexBox_Nombre.Text, out nombre);
+        if (!reussit)
+        {
+            Text_erreur.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Red);
+            Text_erreur.Text = "La valeur saissi doit être un nombre entier non une chaine de caractère";
+            return;
+        }
+        else if (nombre <= 0)
+        {
+            Text_erreur.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Red);
+            Text_erreur.Text = "Veuillez entrer un nombre positif";
+            return;
+        }
+        Text_erreur.Text = "";
+
         Instance instance = new Instance(nombre);
         int[,] matrice = instance.Lecture();
 
@@ -66,33 +81,6 @@ public partial class MainWindow : Window
         Chemin_Glouton.Text = string.Join(" -> ", glouton.CheminGlouton);
         Taille_Glouton.Text = glouton.Cout.ToString();
         Tps_Glouton.Text = Glouton.ElapsedMilliseconds.ToString() + " ms";
-        #endregion
-
-        #region VNS
-        VNS vns = new VNS(matrice);
-        #region sans glouton
-        Stopwatch Vns = new Stopwatch();
-        
-        Vns.Start();
-        vns.TrouverCycleVNS(0);
-        Glouton.Stop();
-
-        Chemin_VNS.Text = string.Join(" -> ", vns.Chemin);
-        Taille_VNS.Text = vns.ObtenirCout(vns.Chemin).ToString();
-        Tps_VNS.Text = Vns.ElapsedMilliseconds.ToString() + " ms";
-        #endregion
-
-        #region avec glouton
-        Stopwatch Vns_glouton = new Stopwatch();
-
-        Vns_glouton.Start();
-        vns.TrouverCycleVNS(glouton.CheminGlouton);
-        Vns_glouton.Stop();
-
-        Chemin_VNS_Glouton.Text = string.Join(" -> ", vns.Chemin);
-        Taille_VNS_Glouton.Text = vns.ObtenirCout(vns.Chemin).ToString();
-        Tps_VNS_Glouton.Text = Vns_glouton.ElapsedMilliseconds.ToString() + " ms";
-        #endregion
         #endregion
 
         #region Grasp Basique
@@ -119,6 +107,32 @@ public partial class MainWindow : Window
         Chemin_Grasp_M.Text = string.Join(" -> ", grasp_M.CheminGrasp);
         Taille_Grasp_M.Text = grasp_M.Cout.ToString();
         Tps_Grasp_M.Text = Grasp_M.ElapsedMilliseconds.ToString() + " ms";
+        #endregion
+
+        #region VNS sans grasp
+        VNS vns = new VNS(matrice);
+        Stopwatch Vns = new Stopwatch();
+
+        Vns.Start();
+        vns.TrouverCycleVNS(0);
+        Vns.Stop();
+
+        Chemin_VNS.Text = string.Join(" -> ", vns.Chemin);
+        Taille_VNS.Text = vns.ObtenirCout(vns.Chemin).ToString();
+        Tps_VNS.Text = Vns.ElapsedMilliseconds.ToString() + " ms";
+        #endregion
+
+        #region VNS avec grasp
+        VNS vns_glouton = new VNS(matrice);
+        Stopwatch Vns_glouton = new Stopwatch();
+
+        Vns_glouton.Start();
+        vns_glouton.TrouverCycleVNS(grasp_B.CheminGrasp);
+        Vns_glouton.Stop();
+
+        Chemin_VNS_Glouton.Text = string.Join(" -> ", vns_glouton.Chemin);
+        Taille_VNS_Glouton.Text = vns_glouton.ObtenirCout(vns_glouton.Chemin).ToString();
+        Tps_VNS_Glouton.Text = Vns_glouton.ElapsedMilliseconds.ToString() + " ms";
         #endregion
 
         #region Fourmie

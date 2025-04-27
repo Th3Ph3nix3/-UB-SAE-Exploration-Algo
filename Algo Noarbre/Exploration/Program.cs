@@ -1,5 +1,4 @@
 ﻿using System;
-using Exploration;
 
 internal class Program
 {
@@ -8,9 +7,9 @@ internal class Program
         Instance test = new Instance(10);
         int[,] matrice = test.Lecture();
         test.affiche();
-        VLS vls = new VLS(matrice);
-        vls.TrouverCycleVLS(0);
-        test.ecriture(vls.Chemin, vls.ObtenirCout(vls.Chemin), "VLS");
+        VNS vns = new VNS(matrice);
+        vns.TrouverCycleVNS(0);
+        test.ecriture(vns.Chemin, vns.ObtenirCout(vns.Chemin), "VNS");
 
     }
 }
