@@ -140,30 +140,34 @@ public partial class MainWindow : Window
         #endregion
 
         #region Held-Karp
-        //ProcessStartInfo info = new ProcessStartInfo();
-        //info.FileName = "Held_Karp.exe";
-        //info.WorkingDirectory = @"../../../../C++";
-        //info.Arguments = $"\"{Matrice_string(matrice)}\"";
-        //info.UseShellExecute = true;
-        //Process.Start(info);
+        ProcessStartInfo info = new ProcessStartInfo();
+        info.FileName = "Held-Karp.exe";
+        info.WorkingDirectory = @"../../../../C++";
+        info.Arguments = $"\"{Matrice_string(matrice)}\"";
+        info.UseShellExecute = true;
 
-        //string CheminOutput = "../../../../C++/output.txt";
-        //string CheminTps = "../../../../C++/temps_execution.txt";
+        Process processus = Process.Start(info);
 
-        //string chemin = "";
-        //string cout = "";
-        //string tps = "";
+        // Attendre que le processus se termine
+        processus.WaitForExit();
 
-        //string[] Lignes_Output = File.ReadAllLines(CheminOutput);
-        //string[] Lignes_Tps = File.ReadAllLines(CheminTps);
-        //chemin = Lignes_Output[0];
-        //cout = Lignes_Output[1];
-        //tps = Lignes_Tps[0];
-        //chemin = chemin.Replace(" ", " -> ");
+        string CheminOutput = "../../../../C++/output.txt";
+        string CheminTps = "../../../../C++/temps_execution.txt";
 
-        //Chemin_H_K.Text = chemin;
-        //Taille_H_K.Text = cout;
-        //Tps_H_K.Text = tps;
+        string chemin = "";
+        string cout = "";
+        string tps = "";
+
+        string[] Lignes_Output = File.ReadAllLines(CheminOutput);
+        string[] Lignes_Tps = File.ReadAllLines(CheminTps);
+        chemin = Lignes_Output[0];
+        cout = Lignes_Output[1];
+        tps = Lignes_Tps[0];
+        chemin = chemin.Replace(" ", " -> ");
+
+        Chemin_H_K.Text = chemin;
+        Taille_H_K.Text = cout;
+        Tps_H_K.Text = tps + " ms";
         #endregion
     }
 
