@@ -54,6 +54,7 @@ public partial class MainWindow : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
+        #region erreur
         int nombre;
         bool reussit = int.TryParse(TexBox_Nombre.Text, out nombre);
         if (!reussit)
@@ -69,9 +70,12 @@ public partial class MainWindow : Window
             return;
         }
         Text_erreur.Text = "";
+        #endregion
 
+        #region initialisation
         Instance instance = new Instance(nombre);
         int[,] matrice = instance.Lecture();
+        #endregion
 
         #region Glouton
         Stopwatch Glouton = new Stopwatch();
@@ -139,50 +143,70 @@ public partial class MainWindow : Window
         #endregion
 
         #region Fourmis
-        Stopwatch Fourmis = new Stopwatch();
-        Fourmis fourmisInstance = new Fourmis();
+        if(nombre > 35)
+        {
+            Chemin_Fourmis.Text = "L'algo n'a pas été exécuté en raison du trop grande nombre de noeuds (tps d'exécution > 1mins)";
+            Taille_Fourmis.Text = "L'algo n'a pas été exécuté en raison du trop grande nombre de noeuds (tps d'exécution > 1mins)";
+            Tps_Fourmis.Text = "L'algo n'a pas été exécuté en raison du trop grande nombre de noeuds (tps d'exécution > 1mins)";
+            return;
+        }
+        else
+        {
+            Stopwatch Fourmis = new Stopwatch();
+            Fourmis fourmisInstance = new Fourmis();
 
-        List<arretes> CheminFourmis = new List<arretes>();
-        Fourmis.Start();
-        CheminFourmis = fourmisInstance.TrouverChemin(matrice);
-        Fourmis.Stop();
-        List<int> chemin_foumis = fourmisInstance.Transformer_Chemin(CheminFourmis);
-        int taille = fourmisInstance.Calculer_taille(CheminFourmis);
+            List<arretes> CheminFourmis = new List<arretes>();
+            Fourmis.Start();
+            CheminFourmis = fourmisInstance.TrouverChemin(matrice);
+            Fourmis.Stop();
+            List<int> chemin_foumis = fourmisInstance.Transformer_Chemin(CheminFourmis);
+            int taille = fourmisInstance.Calculer_taille(CheminFourmis);
 
-        Chemin_Fourmis.Text = string.Join(" -> ", chemin_foumis);
-        Taille_Fourmis.Text = taille.ToString();
-        Tps_Fourmis.Text = Fourmis.ElapsedMilliseconds.ToString() + " ms";
+            Chemin_Fourmis.Text = string.Join(" -> ", chemin_foumis);
+            Taille_Fourmis.Text = taille.ToString();
+            Tps_Fourmis.Text = Fourmis.ElapsedMilliseconds.ToString() + " ms";
+        }
+            
         #endregion
 
         #region Held-Karp
-        ProcessStartInfo info = new ProcessStartInfo();
-        info.FileName = "Held-Karp.exe";
-        info.WorkingDirectory = @"../../../../C++";
-        info.Arguments = $"\"{Matrice_string(matrice)}\"";
-        info.UseShellExecute = true;
+        if(nombre > 25)
+        {
+            Chemin_H_K.Text = "L'algo n'a pas été exécuté en raison du trop grande nombre de noeuds (tps d'exécution exponentiel)";
+            Taille_H_K.Text = "L'algo n'a pas été exécuté en raison du trop grande nombre de noeuds (tps d'exécution exponentiel)";
+            Tps_H_K.Text = "L'algo n'a pas été exécuté en raison du trop grande nombre de noeuds (tps d'exécution exponentiel)";
+        }
+        else
+        {
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.FileName = "Held-Karp.exe";
+            info.WorkingDirectory = @"../../../../C++";
+            info.Arguments = $"\"{Matrice_string(matrice)}\"";
+            info.UseShellExecute = true;
 
-        Process processus = Process.Start(info);
+            Process processus = Process.Start(info);
 
-        // Attendre que le processus se termine
-        processus.WaitForExit();
+            // Attendre que le processus se termine
+            processus.WaitForExit();
 
-        string CheminOutput = "../../../../C++/output.txt";
-        string CheminTps = "../../../../C++/temps_execution.txt";
+            string CheminOutput = "../../../../C++/output.txt";
+            string CheminTps = "../../../../C++/temps_execution.txt";
 
-        string chemin = "";
-        string cout = "";
-        string tps = "";
+            string chemin = "";
+            string cout = "";
+            string tps = "";
 
-        string[] Lignes_Output = File.ReadAllLines(CheminOutput);
-        string[] Lignes_Tps = File.ReadAllLines(CheminTps);
-        chemin = Lignes_Output[0];
-        cout = Lignes_Output[1];
-        tps = Lignes_Tps[0];
-        chemin = chemin.Replace(" ", " -> ");
+            string[] Lignes_Output = File.ReadAllLines(CheminOutput);
+            string[] Lignes_Tps = File.ReadAllLines(CheminTps);
+            chemin = Lignes_Output[0];
+            cout = Lignes_Output[1];
+            tps = Lignes_Tps[0];
+            chemin = chemin.Replace(" ", " -> ");
 
-        Chemin_H_K.Text = chemin;
-        Taille_H_K.Text = cout;
-        Tps_H_K.Text = tps + " ms";
+            Chemin_H_K.Text = chemin;
+            Taille_H_K.Text = cout;
+            Tps_H_K.Text = tps + " ms";
+        }
         #endregion
     }
 
