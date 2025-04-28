@@ -13,11 +13,10 @@ internal class Program
         Console.WriteLine("\n\n");
         Console.WriteLine("Algo GRASP");
 
-        // Instanciation de l'objet GRASP
-        // Ajout du namespace car evite un conflit de nom
         GRASP.GRASP algo = new GRASP.GRASP(matrice);
         algo.Parcour(matrice);
         algo.ToString();
 
+        test.ecriture(algo.CheminGrasp, 10, "GRASP_Modifier");
     }
 }

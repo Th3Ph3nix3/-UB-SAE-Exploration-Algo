@@ -7,9 +7,8 @@ using System.ComponentModel;
 using static System.Net.Mime.MediaTypeNames;
 using System.Drawing;
 
-namespace GRASP
-{
-    public class GRASP
+
+    public class Grasp_M
     {
         #region attributes
         /// <summary>
@@ -69,7 +68,7 @@ namespace GRASP
         /// </summary>
         /// <param name="depart">De base mis au point 0</param>
         /// /// <author>Barthoux Sauze Thomas</author>
-        public GRASP(int[,] matrice)
+        public Grasp_M(int[,] matrice)
         {
             this.depart = 0;
             this.cheminGrasp = new List<int>(matrice.GetLength(0));
@@ -212,4 +211,4 @@ namespace GRASP
 
         #endregion
     }
-}
+

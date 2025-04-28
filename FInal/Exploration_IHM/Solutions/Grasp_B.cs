@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
-using static System.Net.Mime.MediaTypeNames;
-using System.Drawing;
 
-namespace GRASP
-{
-    public class GRASP
+    public class Grasp_B
     {
         #region attributes
+
         /// <summary>
         /// Propriété Depart
         /// </summary>
@@ -35,23 +31,13 @@ namespace GRASP
         #region constructor
 
         /// <summary>
-        /// Propriété Cout
-        /// </summary>
-        /// <author>Barthoux Sauze Thomas</author>
-        public int Cout
-        {
-            get { return cout; }
-            set { cout = value; }
-        }
-
-        /// <summary>
         /// Propriété CheminGrasp
         /// </summary>
         /// <author>Barthoux Sauze Thomas</author>
         public List<int> CheminGrasp
         {
-            get { return cheminGrasp; } 
-            set { cheminGrasp = value; } 
+            get { return cheminGrasp; }
+            set { cheminGrasp = value; }
         }
 
         /// <summary>
@@ -65,19 +51,31 @@ namespace GRASP
         }
 
         /// <summary>
+        /// Propriété Cout
+        /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
+        public int Cout
+        {
+            get { return cout; }
+            set { cout = value; }
+        }
+
+        /// <summary>
         /// Constructeur de la classe GRASP
         /// </summary>
-        /// <param name="depart">De base mis au point 0</param>
-        /// /// <author>Barthoux Sauze Thomas</author>
-        public GRASP(int[,] matrice)
+        /// <param name="depart"></param>
+        /// <author>Barthoux Sauze Thomas</author>
+        public Grasp_B(int[,] matrice)
         {
             this.depart = 0;
             this.cheminGrasp = new List<int>(matrice.GetLength(0));
             this.cout = 0;
         }
+
         #endregion
 
         #region methods
+
         /// <summary>
         /// Ajoute un point au chemin Grasp
         /// </summary>
@@ -94,14 +92,14 @@ namespace GRASP
         /// <param name="matrice"></param>
         /// <returns>Retourne le point le plus grand de la ligne</returns>
         /// <author>Barthoux Sauze Thomas</author>
-        public int Highest(int[,] matrice, int position)
+        public int Highest(int[,] matrice,int point)
         {
             int maxi = int.MinValue;
             for (int i = 0; i < matrice.GetLength(0); i++)
             {
-                if (maxi < matrice[position, i])
+                if (maxi < matrice[point, i])
                 {
-                    maxi = matrice[position, i];
+                    maxi = matrice[point, i];
                 }
             }
             return maxi;
@@ -112,7 +110,7 @@ namespace GRASP
         /// </summary>
         /// <param name="matrice"></param>
         /// <param name="point"></param>
-        /// <returns>Retourne le point suivant</returns>
+        /// <returns>Renvoie le point suivant</returns>
         /// <author>Barthoux Sauze Thomas</author>
         public int selectPoint(int[,] matrice, int point)
         {
@@ -120,7 +118,7 @@ namespace GRASP
             int maxi = int.MaxValue;
 
             //Création d'une liste de point
-            List<(int,int)> liste = new List<(int,int)>();
+            List<(int, int)> liste = new List<(int, int)>();
             for (int i = 0; i < matrice.GetLength(0); i++)
             {
                 liste.Add((i, matrice[point, i]));
@@ -128,6 +126,7 @@ namespace GRASP
 
             Random random = new Random();
             int rdm = random.Next(1, Highest(matrice, point));
+            int rdm2;
 
             // On cherche un point qui - le random et inférieur a 0 et on renvoie cette valeur 
             for (int j = 0; j < liste.Count; j++)
@@ -141,10 +140,10 @@ namespace GRASP
                 }
                 else
                 {
-                    if (calcul < maxi && !IsVisited(liste[j].Item1))
+                    if (j.Equals(liste.Count - 1))
                     {
-                        maxi = calcul;
-                        point = liste[j].Item1;
+                        rdm2 = random.Next(0, liste.Count);
+                        point = liste[rdm2].Item1;
                     }
                 }
             }
@@ -155,7 +154,7 @@ namespace GRASP
         /// Vérifie si le point a déjà été visité
         /// </summary>
         /// <param name="point"></param>
-        /// <returns>Return si oui ou non si on as deja visiter ce point</returns>
+        /// <returns>Dit si on a deja visiter le point ou pas</returns>
         /// <author>Barthoux Sauze Thomas</author>
         public bool IsVisited(int point)
         {
@@ -209,7 +208,6 @@ namespace GRASP
             Console.WriteLine(message);
         }
 
-
         #endregion
+
     }
-}

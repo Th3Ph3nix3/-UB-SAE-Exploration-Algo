@@ -22,6 +22,12 @@ namespace Algo_grasp
         /// <author>Barthoux Sauze Thomas</author>
         private List<int> cheminGrasp;
 
+        /// <summary>
+        /// Propriété Cout
+        /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
+        private int cout;
+
         #endregion
 
         #region constructor
@@ -47,6 +53,16 @@ namespace Algo_grasp
         }
 
         /// <summary>
+        /// Propriété Cout
+        /// </summary>
+        /// <author>Barthoux Sauze Thomas</author>
+        public int Cout
+        {
+            get { return cout; }
+            set { cout = value; }
+        }
+
+        /// <summary>
         /// Constructeur de la classe GRASP
         /// </summary>
         /// <param name="depart"></param>
@@ -55,6 +71,7 @@ namespace Algo_grasp
         {
             this.depart = 0;
             this.cheminGrasp = new List<int>(matrice.GetLength(0));
+            this.cout = 0;
         }
 
         #endregion
@@ -154,7 +171,6 @@ namespace Algo_grasp
         public void Parcour(int[,] matrice)
         {
             int point = this.depart;
-            int cout = 0;
 
             AddChemin(point);
 
@@ -163,12 +179,9 @@ namespace Algo_grasp
                 int suivant = selectPoint(matrice, point);
                 cheminGrasp.Add(suivant);
 
-                cout += matrice[point, suivant];
+                this.cout += matrice[point, suivant];
                 point = suivant;
             }
-
-            Console.WriteLine("Le cout du chemin est de : " + cout);
-
         }
 
         #endregion
@@ -193,6 +206,7 @@ namespace Algo_grasp
             }
             string message = "Le chemin glouton est : " + chemin;
 
+            Console.WriteLine("Le cout du chemin est de : " + this.cout);
             Console.WriteLine(message);
         }
 

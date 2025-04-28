@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-class Instance
+public class Instance
 {
     private int[,] mat_dis;
     private int[,] lis_point;
@@ -111,5 +111,20 @@ class Instance
             }
         }
         return matrice;
+    }
+
+    public void ecriture(List<int> Chemin, int taille_chemin, string nom_algo)
+    {
+        string cheminFichier = "../../../../Solutions/" + nom_algo + ".txt";
+
+        using (StreamWriter writer = new StreamWriter(cheminFichier))
+        {
+            foreach(int chemin in Chemin)
+            {
+                writer.Write((chemin+1).ToString() + " ");
+            }
+            writer.WriteLine();
+            writer.Write(taille_chemin.ToString());
+        }
     }
 }
