@@ -10,6 +10,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using static Exploration.Class;
+using Fourmi;
+using static Fourmi.Fourmis;
 
 namespace Exploration_IHM;
 
@@ -135,8 +138,20 @@ public partial class MainWindow : Window
         Tps_VNS_Glouton.Text = Vns_glouton.ElapsedMilliseconds.ToString() + " ms";
         #endregion
 
-        #region Fourmie
+        #region Fourmis
+        Stopwatch Fourmis = new Stopwatch();
+        Fourmis fourmisInstance = new Fourmis();
 
+        List<arretes> CheminFourmis = new List<arretes>();
+        Fourmis.Start();
+        CheminFourmis = fourmisInstance.TrouverChemin(matrice);
+        Fourmis.Stop();
+        List<int> chemin_foumis = fourmisInstance.Transformer_Chemin(CheminFourmis);
+        int taille = fourmisInstance.Calculer_taille(CheminFourmis);
+
+        Chemin_Fourmis.Text = string.Join(" -> ", chemin_foumis);
+        Taille_Fourmis.Text = taille.ToString();
+        Tps_Fourmis.Text = Fourmis.ElapsedMilliseconds.ToString() + " ms";
         #endregion
 
         #region Held-Karp

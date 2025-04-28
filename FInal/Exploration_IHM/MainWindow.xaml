@@ -328,14 +328,14 @@
                 <TextBlock Text="Chemin proposé :" TextAlignment="Center" FontSize="16"
                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
                            Grid.Row="0" Grid.Column="0"/>
-                <TextBlock x:Name="Chemin_Fourmie"
+                <TextBlock x:Name="Chemin_Fourmis"
                            Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
                            VerticalAlignment="Center" Grid.Column="1" Height="49"/>
 
                 <TextBlock Text="Taille du chemin :" TextAlignment="Center" FontSize="16"
                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
                            Grid.Row="1" Grid.Column="0"/>
-                <TextBlock x:Name="Taille_Fourmie"
+                <TextBlock x:Name="Taille_Fourmis"
                            Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
                            Grid.Row="1" Grid.Column="1"/>
@@ -343,7 +343,7 @@
                 <TextBlock Text="Temps d'execution de l'algo :" TextAlignment="Center" FontSize="16"
                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
                            Grid.Row="2" Grid.Column="0"/>
-                <TextBlock x:Name="Tps_Fourmie"
+                <TextBlock x:Name="Tps_Fourmis"
                            Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
                            Grid.Row="2" Grid.Column="1"/>
