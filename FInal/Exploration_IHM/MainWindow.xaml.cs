@@ -52,6 +52,7 @@ public partial class MainWindow : Window
         return matrice_en_text;
     }
 
+
     private void Button_Click(object sender, RoutedEventArgs e)
     {
         #region erreur
@@ -75,6 +76,8 @@ public partial class MainWindow : Window
         #region initialisation
         Instance instance = new Instance(nombre);
         int[,] matrice = instance.Lecture();
+        List<int> chemin_foumis;
+        string chemin = "";
         #endregion
 
         #region Glouton
@@ -159,7 +162,7 @@ public partial class MainWindow : Window
             Fourmis.Start();
             CheminFourmis = fourmisInstance.TrouverChemin(matrice);
             Fourmis.Stop();
-            List<int> chemin_foumis = fourmisInstance.Transformer_Chemin(CheminFourmis);
+            chemin_foumis = fourmisInstance.Transformer_Chemin(CheminFourmis);
             int taille = fourmisInstance.Calculer_taille(CheminFourmis);
 
             Chemin_Fourmis.Text = string.Join(" -> ", chemin_foumis);
@@ -191,8 +194,6 @@ public partial class MainWindow : Window
 
             string CheminOutput = "../../../../C++/output.txt";
             string CheminTps = "../../../../C++/temps_execution.txt";
-
-            string chemin = "";
             string cout = "";
             string tps = "";
 
@@ -208,6 +209,8 @@ public partial class MainWindow : Window
             Tps_H_K.Text = tps + " ms";
         }
         #endregion
-    }
 
+        Graphe fenetreGraphe = new Graphe(matrice, glouton.CheminGlouton, grasp_B.CheminGrasp, grasp_M.CheminGrasp, vns.Chemin, vns_glouton.Chemin, chemin_foumis, chemin);
+        fenetreGraphe.Show();
+    }
 }

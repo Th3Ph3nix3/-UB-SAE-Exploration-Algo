@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Exploration_IHM"
         mc:Ignorable="d"
-        Title="Graphe" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Graphe" Height="600" Width="600">
+    <Canvas x:Name="myCanvas" Background="White">
+        <Label Content="Glouton : Gris / GRASP basique : Rouge / GRASP modifié : Vert / VNS seul : Bleu / VNS avec GRASP : Jaune / Fourmis : Magenta / Held-Karp : Orange" Canvas.Left="10" Canvas.Top="10" FontSize="7.5"/>
+    </Canvas>
 </Window>
