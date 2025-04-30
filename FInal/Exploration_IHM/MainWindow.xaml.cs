@@ -210,7 +210,10 @@ public partial class MainWindow : Window
         }
         #endregion
 
+        #region Affichage_Graphe
+        /// <author>Hugo Linard<author>
         Graphe fenetreGraphe = new Graphe(matrice, glouton.CheminGlouton, grasp_B.CheminGrasp, grasp_M.CheminGrasp, vns.Chemin, vns_glouton.Chemin, chemin_foumis, chemin);
         fenetreGraphe.Show();
+        #endregion
     }
 }
