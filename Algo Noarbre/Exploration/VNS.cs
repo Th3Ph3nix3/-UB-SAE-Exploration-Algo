@@ -10,13 +10,16 @@ public class VNS
 {
     #region Attributs
     private int[,] matriceDistances;  // Matrice des distances entre les sommets
-    private int nombreSommets;         // Nombre total de sommets
-    private const int TEMPS_LIMITE_MS = 5000; // Temps limite d'exécution en millisecondes
+    private int nombreSommets;        // Nombre total de sommets
+    private const int TEMPS_LIMITE_MS = 5000; // Temps limite d'exécution pour chaque amélioration
     private List<int> chemin = new List<int>(); // Chemin trouvé
     #endregion
 
     #region Propriétés
-    public List<int> Chemin => chemin;          // Propriété pour accéder au chemin
+    /// <summary>
+    /// Renvoie le chemin trouvé après l'exécution de l'algorithme.
+    /// </summary>
+    public List<int> Chemin => chemin;
     #endregion
 
     #region Constructeur
@@ -46,8 +49,7 @@ public class VNS
         }
         cheminInitial.Add(depart);
 
-        Stopwatch chrono = Stopwatch.StartNew();
-        this.chemin = OptimiserRecursivement(cheminInitial, 2, chrono);
+        this.chemin = OptimiserRecursivement(cheminInitial, 2);
     }
 
     /// <summary>
@@ -58,8 +60,8 @@ public class VNS
     {
         if (solutionInitiale[0] != solutionInitiale[^1])
             solutionInitiale.Add(solutionInitiale[0]);
-        Stopwatch chrono = Stopwatch.StartNew();
-        this.chemin = OptimiserRecursivement(new List<int>(solutionInitiale), 2, chrono);
+
+        this.chemin = OptimiserRecursivement(new List<int>(solutionInitiale), 2);
     }
 
     /// <summary>
@@ -76,40 +78,49 @@ public class VNS
     #region Méthodes privées
     /// <summary>
     /// Optimise récursivement un chemin en testant différentes tailles de voisinage.
+    /// Chaque appel est limité à un temps d'exécution maximal pour chaque amélioration.
     /// </summary>
     /// <param name="chemin">Chemin actuel à optimiser.</param>
     /// <param name="niveauOpt">Taille du voisinage utilisée pour le swap.</param>
-    /// <param name="chrono">Chronomètre utilisé pour respecter la limite de temps.</param>
-    /// <returns>Le meilleur chemin trouvé après optimisation.</returns>
-    private List<int> OptimiserRecursivement(List<int> chemin, int niveauOpt, Stopwatch chrono)
+    /// <returns>Le meilleur chemin trouvé après optimisation locale.</returns>
+    private List<int> OptimiserRecursivement(List<int> chemin, int niveauOpt)
     {
-        if (chrono.ElapsedMilliseconds > TEMPS_LIMITE_MS)
-            return chemin;
-
         int coutActuel = CalculerCout(chemin);
-
-        for (int i = 1; i < chemin.Count - niveauOpt; i++)
+        Stopwatch chrono = Stopwatch.StartNew(); // Chrono pour mesurer chaque tentative d'amélioration
+        bool improvementFound = true;
+        // Tant qu'il y a des améliorations à faire et que le temps n'est pas écoulé
+        while (improvementFound && chrono.ElapsedMilliseconds <= TEMPS_LIMITE_MS)
         {
-            int j = i + niveauOpt - 1;
-            if (j >= chemin.Count - 1) break;
-
-            List<int> nouveauChemin = OptSwap(chemin, i, j);
-            int nouveauCout = CalculerCout(nouveauChemin);
-
-            if (nouveauCout < coutActuel)
+            improvementFound = false; // Par défaut, pas d'amélioration trouvée
+            for (int i = 1; i < chemin.Count - niveauOpt; i++)
             {
-                return OptimiserRecursivement(nouveauChemin, 2, chrono);
+                int j = i + niveauOpt - 1;
+                if (j >= chemin.Count - 1) break;
+                // Vérifie le temps limite pour chaque tentative d'amélioration
+                if (chrono.ElapsedMilliseconds > TEMPS_LIMITE_MS)
+                    return chemin;
+                // Essayer un swap de voisinage
+                List<int> nouveauChemin = OptSwap(chemin, i, j);
+                int nouveauCout = CalculerCout(nouveauChemin);
+                // Si on a trouvé une meilleure solution, on l'applique et on réinitialise le chrono
+                if (nouveauCout < coutActuel)
+                {
+                    chemin = nouveauChemin;
+                    coutActuel = nouveauCout;
+                    improvementFound = true; // On a trouvé une amélioration
+                    chrono.Restart(); // Réinitialisation du chrono après chaque amélioration
+                    break; // On quitte le for pour réessayer une amélioration avec le nouveau chemin
+                }
             }
-
-            if (chrono.ElapsedMilliseconds > TEMPS_LIMITE_MS)
-                return chemin;
+            // Si on n'a pas trouvé d'amélioration dans la boucle, on augmente la taille du voisinage
+            if (!improvementFound && niveauOpt < chemin.Count - 2)
+            {
+                chemin = OptimiserRecursivement(chemin, niveauOpt + 1); // Essayer un voisinage plus large
+            }
         }
-
-        if (niveauOpt < chemin.Count - 2)
-            return OptimiserRecursivement(chemin, niveauOpt + 1, chrono);
-
-        return chemin;
+        return chemin; // Retourner le meilleur chemin trouvé
     }
+
 
     /// <summary>
     /// Effectue une inversion du sous-chemin entre les indices i et j.

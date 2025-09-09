@@ -79,7 +79,7 @@
                 </Button.RenderTransform>
             </Button>
 
-            
+
 
             <Grid HorizontalAlignment="left" Grid.Row="4" Grid.Column="1">
                 <TextBlock TextAlignment="Center"
@@ -141,32 +141,27 @@
                     <RowDefinition Height="10*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*" />
-                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="97*" />
+                    <ColumnDefinition Width="216*"/>
+                    <ColumnDefinition Width="313*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Chemin proposé :" TextAlignment="Center" FontSize="16"
-               HorizontalAlignment="Stretch" VerticalAlignment="Center"
-               Grid.Row="0" Grid.Column="0"/>
+                <TextBlock Text="Chemin proposé :" TextAlignment="Center" FontSize="16" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2"/>
                 <TextBlock x:Name="Chemin_Grasp_B"
                Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
-               VerticalAlignment="Center" Grid.Column="1" Height="49"/>
+               VerticalAlignment="Center" Grid.Column="1" Height="48" Grid.ColumnSpan="2" Margin="216,0,0,0"/>
 
-                <TextBlock Text="Taille du chemin :" TextAlignment="Center" FontSize="16"
-               HorizontalAlignment="Stretch" VerticalAlignment="Center"
-               Grid.Row="1" Grid.Column="0"/>
+                <TextBlock Text="Taille du chemin :" TextAlignment="Center" FontSize="16" VerticalAlignment="Center"
+               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
                 <TextBlock x:Name="Taille_Grasp_B"
-               Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
-               HorizontalAlignment="Stretch" VerticalAlignment="Center"
-               Grid.Row="1" Grid.Column="1"/>
+               Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap" VerticalAlignment="Center"
+               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="216,0,0,0"/>
 
-                <TextBlock Text="Temps d'execution de l'algo :" TextAlignment="Center" FontSize="16"
-               HorizontalAlignment="Stretch" VerticalAlignment="Center"
-               Grid.Row="2" Grid.Column="0"/>
+                <TextBlock Text="Temps d'execution de l'algo :" TextAlignment="Center" FontSize="16" VerticalAlignment="Center"
+               Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
                 <TextBlock x:Name="Tps_Grasp_B"
-               Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"
-               HorizontalAlignment="Stretch" VerticalAlignment="Center"
-               Grid.Row="2" Grid.Column="1"/>
+               Text="" TextAlignment="Center" FontSize="16" TextWrapping="Wrap" VerticalAlignment="Center"
+               Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="216,0,0,0"/>
             </Grid>
 
 
@@ -213,9 +208,9 @@
                HorizontalAlignment="Stretch" VerticalAlignment="Center"
                Grid.Row="2" Grid.Column="1"/>
             </Grid>
-            
-            
-            
+
+
+
             <Grid HorizontalAlignment="left" Grid.Row="10" Grid.Column="1">
                 <TextBlock TextAlignment="Center"
                HorizontalAlignment="Stretch" VerticalAlignment="Center"
@@ -305,12 +300,12 @@
             </Grid>
 
 
-            
+
             <Grid HorizontalAlignment="left" Grid.Row="14" Grid.Column="1">
                 <TextBlock TextAlignment="Center"
                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
                            FontSize="16">
-                           <Run FontWeight="Bold">Algo des Fourmie</Run> :
+                           <Run FontWeight="Bold">Algo des Fourmies</Run> :
                 </TextBlock>
             </Grid>
 
